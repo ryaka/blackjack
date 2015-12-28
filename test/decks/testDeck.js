@@ -65,7 +65,7 @@ describe('Deck', () => {
     });
 
     it('should not add card if card is not in known cards list', () => {
-      //force a card into the drawnPile
+      //force a card into the drawn card pile
       let fakeCat = 'notacat';
       deck.drawnCards.push(fakeCat);
 
