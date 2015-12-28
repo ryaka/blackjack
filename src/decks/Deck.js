@@ -15,10 +15,12 @@ class Deck {
 
   _claimDeckOwnership() {
     this._cards.forEach(c => c.addDeckOwnership(this.id));
+    return this;
   }
 
   _unclaimDeckOwnership() {
     this._cards.forEach(c => c.removeDeckOwnership(this.id));
+    return this;
   }
 
   //Puts all cards back into the deck and shuffles the deck

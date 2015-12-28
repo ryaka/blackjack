@@ -15,7 +15,7 @@ class MultiStandardDeck extends Deck {
 
     this.deck = this._cards.map(card => card);
 
-    this._claimDeckOwnership();
+    this.shuffle()._claimDeckOwnership();
   }
 
   //Puts all cards back into the deck and shuffles the deck
