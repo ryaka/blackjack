@@ -13,6 +13,14 @@ class Deck {
     this.shuffleAlgorithm = options.shuffleAlgorithm || (_ => _);
   }
 
+  _claimDeckOwnership() {
+    this._cards.forEach(c => c.addDeckOwnership(this.id));
+  }
+
+  _unclaimDeckOwnership() {
+    this._cards.forEach(c => c.removeDeckOwnership(this.id));
+  }
+
   //Puts all cards back into the deck and shuffles the deck
   //According to the input algorithm.
   //Returns itself for method chaining.

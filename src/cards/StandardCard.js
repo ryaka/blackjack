@@ -2,30 +2,28 @@ class StandardCard {
   constructor(options) {
     this.suit = options.suit;
     this.rank = options.rank;
-    this._decks = options.decks || [];
+    this._owners = options.owners || [];
   }
 
-  addDeckOwnership (id) {
-    if(this.isOwnedByDeck(id)) {return false;}
-    this
-      ._decks
-      .push(id);
+  addDeckOwnership(id) {
+    if (this.isOwnedByDeck(id)) {
+      return false;
+    }
+    this._owners.push(id);
     return true;
   }
 
-  removeDeckOwnership (id) {
-    if(this.isOwnedByDeck(id)) {
-      let idIndex = this._decks.indexOf(id);
-      this._decks.splice(idIndex, 1);
+  removeDeckOwnership(id) {
+    if (this.isOwnedByDeck(id)) {
+      let idIndex = this._owners.indexOf(id);
+      this._owners.splice(idIndex, 1);
       return true;
     }
     return false;
   }
 
-  isOwnedByDeck (id) {
-    return this
-      ._decks
-      .indexOf(id) > -1;
+  isOwnedByDeck(id) {
+    return this._owners.indexOf(id) > -1;
   }
 }
 export default StandardCard;

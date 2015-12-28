@@ -17,6 +17,8 @@ class StandardDeck extends Deck {
     }, []);
 
     this.deck = this._cards.map(card => card);
+
+    this._claimDeckOwnership();
   }
 }
 export default StandardDeck;
