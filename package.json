@@ -15,6 +15,7 @@
   "dependencies": {
     "chai": "^3.4.1",
     "mocha": "^2.3.4",
-    "node-uuid": "^1.4.7"
+    "node-uuid": "^1.4.7",
+    "random-seed": "^0.3.0"
   }
 }
