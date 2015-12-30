@@ -1,34 +1,28 @@
 import PRNG from './PRNG.js';
 
-function getInternalAlgorithm(algorithm, prng) {
-  let internalAlgorithms = {
-    FisherYates(deck) {
-      for(let i = 0; i < deck.length; i++) {
-        var swapIndex = prng.getRandomInt(0, i);
-        var tempVal = deck[swapIndex];
-        deck[swapIndex] = deck[i];
-        deck[i] = tempVal;
-      }
-
-      return deck;
-    }
-  };
-
-  return internalAlgorithms[algorithm];
-}
-
 class Shuffler {
   constructor(options = {}) {
     this.prng = new PRNG(options.prng);
-    this.algorithm = this.changeAlgorithmTo(options.algorithm) || this.changeAlgorithmTo('FisherYates');
+
+    this._internalAlgorithms = {
+      FisherYates: (deck) => {
+        for(let i = 0; i < deck.length; i++) {
+          let swapIndex = this.prng.getRandomInt(0, i);
+          [deck[i], deck[swapIndex]] = [deck[swapIndex], deck[i]];
+        }
+        return deck;
+      }
+    };
+
+    this.algorithm = this.changeAlgorithmTo(options.algorithm);
   }
 
   getAvailableAlgorithms() {
-    return Object.keys(internalAlgorithms);
+    return Object.keys(this._internalAlgorithms);
   }
 
   changeAlgorithmTo(algorithm) {
-    this.algorithm = getInternalAlgorithm(algorithm, this.prng);
+    this.algorithm = this._internalAlgorithms[algorithm] || this._internalAlgorithms['FisherYates'];
     return this.algorithm;
   }
 

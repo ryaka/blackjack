@@ -1,24 +1,21 @@
-function getInternalAlgorithm(algorithm) {
-  let internalAlgorithms = {
-    GRC: require('random-seed').create()
-  };
-
-  return internalAlgorithms[algorithm];
-}
-
 //Module / class that stitches together all the prng in common interface
 class PRNG {
   constructor(options = {}) {
+    this._internalAlgorithms = {
+      GRC: require('random-seed').create(),
+      Math: Math
+    };
+
     this.algorithm = this.changeAlgorithmTo(options.algorithm) || this.changeAlgorithmTo('GRC');
     this.seed(options.seed);
   }
 
   getAvailableAlgorithms() {
-    return Object.keys(internalAlgorithms);
+    return Object.keys(this._internalAlgorithms);
   }
 
   changeAlgorithmTo(algorithm) {
-    this.algorithm = getInternalAlgorithm(algorithm);
+    this.algorithm = this._internalAlgorithms[algorithm] || this._internalAlgorithms['GRC'];
     return this.algorithm;
   }
 
